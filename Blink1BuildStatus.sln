@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink1BuildStatus.Core", "Blink1BuildStatus.Core\Blink1BuildStatus.Core.csproj", "{8B5E6638-BBAD-4365-A556-27F61604C094}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink1BuildStatus.Infrastructure.Blink1Control", "Blink1BuildStatus.Infrastructure.Blink1Control\Blink1BuildStatus.Infrastructure.Blink1Control.csproj", "{9DDBC0F7-6161-48BD-B33E-35302AB90BBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink1BuildStatus.Infrastructure.TfsAccess", "Blink1BuildStatus.Infrastructure.TfsAccess\Blink1BuildStatus.Infrastructure.TfsAccess.csproj", "{BB05BA85-0BF5-4C9A-AB94-0C96D2A244A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FCE6C4C-D98E-4CF5-A5F3-5CC2B4545676}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +47,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {256887BB-2C8C-47B2-9B03-E6C330F37D34}
 	EndGlobalSection
 EndGlobal
