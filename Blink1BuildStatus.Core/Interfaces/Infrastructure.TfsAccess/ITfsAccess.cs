@@ -1,7 +1,9 @@
-﻿namespace Blink1BuildStatus.Core.Interfaces.Infrastructure.TfsAccess
+﻿using System.Collections.Generic;
+
+namespace Blink1BuildStatus.Core.Interfaces.Infrastructure.TfsAccess
 {
     public interface ITfsAccess
     {
-        BuildStatus GetBuildStatus();
+        IEnumerable<BuildStatus> GetLatestBuildStatuses(string projectName, IEnumerable<string> definitionIDs = null);
     }
 }

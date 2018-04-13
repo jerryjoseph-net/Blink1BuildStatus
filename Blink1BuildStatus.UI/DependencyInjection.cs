@@ -26,10 +26,7 @@ namespace Blink1BuildStatus.UI
 
             TfsAccess = AppSettings.TFS.UseFake
                 ? (ITfsAccess)new FakeTfsAccess()
-                : new TfsAccess(
-                    new TfsApiClient(AppSettings.TFS.Host, AppSettings.TFS.Username, AppSettings.TFS.Password),
-                    AppSettings.TFS.ProjectID, 
-                    AppSettings.TFS.DefinitionIDs);
+                : new TfsAccess(new TfsApiClient(AppSettings.TFS.Host, AppSettings.TFS.Username, AppSettings.TFS.Password));
 
             TeamCityAccess = AppSettings.TeamCity.UseFake
                 ? (ITeamCityAccess)new FakeTeamCityAccess()
@@ -39,7 +36,7 @@ namespace Blink1BuildStatus.UI
                     AppSettings.TeamCity.Username,
                     AppSettings.TeamCity.Password);
 
-            BuildService = new TfsBuildService(TfsAccess);
+            BuildService = new TfsBuildService(TfsAccess, AppSettings.TFS.ProjectID, AppSettings.TFS.DefinitionIDs);
             //BuildService = new TeamCityBuildService(TeamCityAccess, buildConfigurationIDs);
 
             Blink1Factory = new Blink1Factory(fadeInsteadOfBlink);

@@ -57,8 +57,12 @@
     <Compile Include="TfsAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TfsApiClient.cs" />
+    <Compile Include="TfsBuildDefinition.cs" />
     <Compile Include="TfsBuildItem.cs" />
+    <Compile Include="TfsBuildItemExtensions.cs" />
+    <Compile Include="TfsBuildResult.cs" />
     <Compile Include="TfsBuildsResponse.cs" />
+    <Compile Include="TfsBuildStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -24,7 +24,7 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encodedCredentialBytes);
         }
 
-        public async Task<TfsBuildsResponse> GetBuildsAsync(string projectName, List<string> definitions = null)
+        public async Task<TfsBuildsResponse> GetBuildsAsync(string projectName, IEnumerable<string> definitions = null)
         {
             var url = $"DefaultCollection/{projectName}/_apis/build/builds?api-version=2.0";
 
