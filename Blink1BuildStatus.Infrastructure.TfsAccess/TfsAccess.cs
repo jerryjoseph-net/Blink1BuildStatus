@@ -33,7 +33,7 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
             {
                 return BuildStatus.Success;
             }
-            if (latestBuild.Result == "failed")
+            if (latestBuild.Result == "failed" || latestBuild.Result == "partiallySucceeded")
             {
                 return BuildStatus.Failure;
             }
