@@ -3,9 +3,36 @@ using Blink1BuildStatus.Core.Interfaces;
 
 namespace Blink1BuildStatus.UI
 {
-    public class ConsoleLogger : ILogger
+    public class ConsoleLogger : ILog
     {
-        public void LogInfo(string message)
+        public void Info(string message)
+        {
+            CreateStandardLog(message);
+        }
+
+        public void Error(string message)
+        {
+            LogWithColour(message, ConsoleColor.Red);
+        }
+
+        public void Success(string message)
+        {
+            LogWithColour(message, ConsoleColor.Green);
+        }
+
+        public void Warning(string message)
+        {
+            LogWithColour(message, ConsoleColor.Yellow);
+        }
+
+        private void LogWithColour(string message, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            CreateStandardLog(message);
+            Console.ResetColor();
+        }
+
+        private void CreateStandardLog(string message)
         {
             Console.WriteLine($"[{DateTime.Now:u}] {message}");
         }

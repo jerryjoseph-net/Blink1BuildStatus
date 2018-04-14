@@ -13,18 +13,18 @@ namespace Blink1BuildStatus.Core
     {
         private readonly IBlink1Factory _blink1Factory;
         private readonly IBuildService _buildService;
-        private readonly ILogger _logger;
+        private readonly ILog _log;
 
-        public BuildStatusMonitor(IBlink1Factory blink1Factory, IBuildService buildService, ILogger logger)
+        public BuildStatusMonitor(IBlink1Factory blink1Factory, IBuildService buildService, ILog log)
         {
             _blink1Factory = blink1Factory;
             _buildService = buildService;
-            _logger = logger;
+            _log = log;
         }
 
         public void Monitor()
         {
-            _logger.LogInfo("Starting build monitoring");
+            _log.Info("Starting build monitoring");
 
             using (var blink1 = _blink1Factory.Create())
             {
@@ -38,7 +38,7 @@ namespace Blink1BuildStatus.Core
                     }
                     catch (Exception)
                     {
-                        _logger.LogInfo("Unable to connect");
+                        _log.Error("Unable to connect");
                     }
 
                     Thread.Sleep(2000);
@@ -50,25 +50,25 @@ namespace Blink1BuildStatus.Core
         {
             if (latestBuildStatuses.Any(lb => lb == BuildStatus.Failure))
             {
-                _logger.LogInfo("Setting RED due to one or more failures");
+                _log.Error("Setting RED due to one or more failures");
 
                 blink1.SetRed();
             }
             else if (latestBuildStatuses.All(lb => lb == BuildStatus.Success))
             {
-                _logger.LogInfo("Setting GREEN since all succeeded");
+                _log.Success("Setting GREEN since all succeeded");
 
                 blink1.SetGreen();
             }
             else if (latestBuildStatuses.Any(lb => lb == BuildStatus.Running))
             {
-                _logger.LogInfo("Setting ORANGE since one or more builds is running");
+                _log.Warning("Setting ORANGE since one or more builds is running");
 
                 blink1.SetOrange();
             }
             else
             {
-                _logger.LogInfo("Setting GREY due to unknown state");
+                _log.Info("Setting GREY due to unknown state");
 
                 blink1.SetGrey();
             }
