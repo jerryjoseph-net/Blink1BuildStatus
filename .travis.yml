@@ -4,5 +4,5 @@ install:
 - sudo apt-get install nunit-console
 - nuget restore Blink1BuildStatus.sln
 script:
-- xbuild ./Fibonacci/Fibonacci.sln
+- xbuild Blink1BuildStatus.sln
 - nunit-console ./Blink1BuildStatus.Test.Unit/bin/Debug/Blink1BuildStatus.Test.Unit.dll
