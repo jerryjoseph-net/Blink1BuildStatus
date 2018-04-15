@@ -16,6 +16,8 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
             _tfsApiClient = tfsApiClient;
         }
 
+        public string TfsInstance => _tfsApiClient.Instance;
+
         public IEnumerable<BuildStatus> GetLatestBuildStatuses(string projectName, IEnumerable<string> definitionIDs = null)
         {
             var tfsBuildsResponse = _tfsApiClient.GetBuildsAsync(projectName, definitionIDs).Result;

@@ -16,6 +16,8 @@ namespace Blink1BuildStatus.Core.Services
             _buildConfigurationIDs = buildConfigurationIDs;
         }
 
+        public IEnumerable<string> Info => new[] { "" };
+
         public List<BuildStatus> GetLatestBuildStatuses()
         {
             return _buildConfigurationIDs.Select(bci => _teamCityAccess.GetBuildStatus(bci)).ToList();

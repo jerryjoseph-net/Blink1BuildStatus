@@ -7,6 +7,8 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
 {
     public class FakeTfsAccess : ITfsAccess
     {
+        public string TfsInstance => "";
+
         public IEnumerable<BuildStatus> GetLatestBuildStatuses(string projectName, IEnumerable<string> definitionIDs = null)
         {
             var s = DateTime.Now.Second % 10;

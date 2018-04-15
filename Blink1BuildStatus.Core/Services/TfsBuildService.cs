@@ -18,6 +18,13 @@ namespace Blink1BuildStatus.Core.Services
             _definitionIDs = definitionIDs;
         }
 
+        public IEnumerable<string> Info => new [] 
+        {
+            $"Instance: {_tfsAccess.TfsInstance}",
+            $"ProjectName: {_projectName}",
+            $"DefinitionIDs: {string.Join(",", _definitionIDs)}"
+        };
+
         public List<BuildStatus> GetLatestBuildStatuses()
         {
             var buildStatuses = _tfsAccess.GetLatestBuildStatuses(_projectName, _definitionIDs);

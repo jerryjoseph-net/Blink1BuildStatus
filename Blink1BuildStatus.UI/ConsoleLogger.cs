@@ -10,6 +10,15 @@ namespace Blink1BuildStatus.UI
             CreateStandardLog(message);
         }
 
+        public void Heading(string message)
+        {
+            Console.WriteLine();
+            Console.WriteLine("******************************************************************************");
+            CreateStandardLog(message);
+            Console.WriteLine("******************************************************************************");
+            Console.WriteLine();
+        }
+
         public void Error(string message)
         {
             LogWithColour(message, ConsoleColor.Red);

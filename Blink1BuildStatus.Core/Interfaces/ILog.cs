@@ -4,6 +4,8 @@ namespace Blink1BuildStatus.Core.Interfaces
     {
         void Info(string message);
 
+        void Heading(string message);
+
         void Success(string message);
         void Warning(string message);
         void Error(string message);

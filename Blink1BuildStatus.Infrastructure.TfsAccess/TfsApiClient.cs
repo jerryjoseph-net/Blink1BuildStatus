@@ -16,6 +16,8 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
         {
             _httpClient = new HttpClient {BaseAddress = new Uri(tfsHost)};
 
+            Instance = tfsHost;
+
             var mediaTypeHeader = new MediaTypeWithQualityHeaderValue("application/json");
             _httpClient.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
 
@@ -24,9 +26,11 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encodedCredentialBytes);
         }
 
+        public string Instance { get; set; }
+
         public async Task<TfsBuildsResponse> GetBuildsAsync(string projectName, IEnumerable<string> definitions = null)
         {
-            var url = $"DefaultCollection/{projectName}/_apis/build/builds?api-version=2.0";
+            var url = $"{Instance}/DefaultCollection/{projectName}/_apis/build/builds?api-version=2.0";
 
             if (definitions != null && definitions.Any())
             {

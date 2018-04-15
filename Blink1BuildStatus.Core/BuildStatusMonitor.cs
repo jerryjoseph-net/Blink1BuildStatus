@@ -24,7 +24,12 @@ namespace Blink1BuildStatus.Core
 
         public void Monitor()
         {
-            _log.Info("Starting build monitoring");
+            _log.Heading("Starting build monitoring");
+
+            foreach (var info in _buildService.Info)
+            {
+                _log.Info(info);
+            }
 
             using (var blink1 = _blink1Factory.Create())
             {
