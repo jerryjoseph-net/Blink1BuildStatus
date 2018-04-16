@@ -16,7 +16,11 @@ namespace Blink1BuildStatus.Core.Services
             _buildConfigurationIDs = buildConfigurationIDs;
         }
 
-        public IEnumerable<string> Info => new[] { "" };
+        public IEnumerable<string> Info => new[] 
+        {
+            $"Instance: {_teamCityAccess.TeamCityInstance}",
+            $"BuildConfigurationIDs: {string.Join(";", _buildConfigurationIDs)}"
+        };
 
         public List<BuildStatus> GetLatestBuildStatuses()
         {

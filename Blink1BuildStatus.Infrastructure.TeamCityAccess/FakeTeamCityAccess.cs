@@ -6,6 +6,8 @@ namespace Blink1BuildStatus.Infrastructure.TeamCityAccess
 {
     public class FakeTeamCityAccess : ITeamCityAccess
     {
+        public string TeamCityInstance => "";
+
         public BuildStatus GetBuildStatus(string buildConfigurationId)
         {
             var s = DateTime.Now.Second % 10;

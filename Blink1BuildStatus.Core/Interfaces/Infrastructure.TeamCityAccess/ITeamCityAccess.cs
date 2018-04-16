@@ -2,6 +2,8 @@
 {
     public interface ITeamCityAccess
     {
+        string TeamCityInstance { get; }
+
         BuildStatus GetBuildStatus(string buildConfigurationId);
     }
 }

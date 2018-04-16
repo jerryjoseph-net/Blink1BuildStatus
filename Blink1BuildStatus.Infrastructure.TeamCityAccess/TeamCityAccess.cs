@@ -24,6 +24,8 @@ namespace Blink1BuildStatus.Infrastructure.TeamCityAccess
             _password = password;
         }
 
+        public string TeamCityInstance => _teamCityHost;
+
         public BuildStatus GetBuildStatus(string buildConfigurationId)
         {
             try
