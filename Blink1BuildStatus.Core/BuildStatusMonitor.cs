@@ -55,19 +55,19 @@ namespace Blink1BuildStatus.Core
         {
             if (latestBuildStatuses.Any(lb => lb == BuildStatus.Failure))
             {
-                _log.Error("Setting RED due to one or more failures");
+                _log.Error("Setting RED due to one or more build failures");
 
                 blink1.SetRed();
             }
             else if (latestBuildStatuses.All(lb => lb == BuildStatus.Success))
             {
-                _log.Success("Setting GREEN since all succeeded");
+                _log.Success("Setting GREEN since all builds succeeded");
 
                 blink1.SetGreen();
             }
             else if (latestBuildStatuses.Any(lb => lb == BuildStatus.Running))
             {
-                _log.Warning("Setting ORANGE since one or more builds is running");
+                _log.Warning("Setting ORANGE since one or more builds are running");
 
                 blink1.SetOrange();
             }
