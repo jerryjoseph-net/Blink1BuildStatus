@@ -8,6 +8,7 @@ using Blink1BuildStatus.Core.Services;
 using Blink1BuildStatus.Infrastructure.Blink1Control;
 using Blink1BuildStatus.Infrastructure.TeamCityAccess;
 using Blink1BuildStatus.Infrastructure.TfsAccess;
+using System;
 
 namespace Blink1BuildStatus.UI
 {
@@ -21,23 +22,25 @@ namespace Blink1BuildStatus.UI
 
         public static void Setup()
         {
-            //var buildConfigurationIDs = AppSettings.TeamCity.BuildConfigurationIDs;
             var fadeInsteadOfBlink = AppSettings.Blink1.FadeInsteadOfBlink;
 
             TfsAccess = AppSettings.TFS.UseFake
                 ? (ITfsAccess)new FakeTfsAccess()
-                : new TfsAccess(new TfsApiClient(AppSettings.TFS.Host, AppSettings.TFS.Username, AppSettings.TFS.Password));
+                : new TfsAccess(new TfsApiClient(AppSettings.TFS.Instance, AppSettings.TFS.Username, AppSettings.TFS.Password));
 
             TeamCityAccess = AppSettings.TeamCity.UseFake
                 ? (ITeamCityAccess)new FakeTeamCityAccess()
                 : new TeamCityAccess(
-                    AppSettings.TeamCity.Host,
+                    AppSettings.TeamCity.Instance,
                     AppSettings.TeamCity.UseGuestLogin,
                     AppSettings.TeamCity.Username,
                     AppSettings.TeamCity.Password);
 
-            BuildService = new TfsBuildService(TfsAccess, AppSettings.TFS.ProjectID, AppSettings.TFS.DefinitionIDs);
-            //BuildService = new TeamCityBuildService(TeamCityAccess, buildConfigurationIDs);
+            BuildService = AppSettings.Monitoring.BuildServer == BuildServer.TFS || AppSettings.Monitoring.BuildServer == BuildServer.VSTS
+                ? (IBuildService)new TfsBuildService(TfsAccess, AppSettings.TFS.ProjectID, AppSettings.TFS.BuildDefinitionIDs)
+                : AppSettings.Monitoring.BuildServer == BuildServer.TeamCity
+                    ? new TeamCityBuildService(TeamCityAccess, AppSettings.TeamCity.BuildConfigurationIDs)
+                    : throw new ArgumentOutOfRangeException(nameof(AppSettings.Monitoring.BuildServer));
 
             Blink1Factory = new Blink1Factory(fadeInsteadOfBlink);
 

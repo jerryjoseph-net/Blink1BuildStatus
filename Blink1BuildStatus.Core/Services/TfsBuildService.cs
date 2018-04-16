@@ -9,25 +9,25 @@ namespace Blink1BuildStatus.Core.Services
     {
         private readonly ITfsAccess _tfsAccess;
         private readonly string _projectName;
-        private readonly IEnumerable<string> _definitionIDs;
+        private readonly IEnumerable<string> _buildDefinitionIDs;
 
-        public TfsBuildService(ITfsAccess tfsAccess, string projectName, IEnumerable<string> definitionIDs = null)
+        public TfsBuildService(ITfsAccess tfsAccess, string projectName, IEnumerable<string> buildDefinitionIDs = null)
         {
             _tfsAccess = tfsAccess;
             _projectName = projectName;
-            _definitionIDs = definitionIDs;
+            _buildDefinitionIDs = buildDefinitionIDs;
         }
 
         public IEnumerable<string> Info => new [] 
         {
             $"Instance: {_tfsAccess.TfsInstance}",
             $"ProjectName: {_projectName}",
-            $"DefinitionIDs: {string.Join(",", _definitionIDs)}"
+            $"BuildDefinitionIDs: {string.Join(";", _buildDefinitionIDs)}"
         };
 
         public List<BuildStatus> GetLatestBuildStatuses()
         {
-            var buildStatuses = _tfsAccess.GetLatestBuildStatuses(_projectName, _definitionIDs);
+            var buildStatuses = _tfsAccess.GetLatestBuildStatuses(_projectName, _buildDefinitionIDs);
 
             return buildStatuses.ToList();
         }

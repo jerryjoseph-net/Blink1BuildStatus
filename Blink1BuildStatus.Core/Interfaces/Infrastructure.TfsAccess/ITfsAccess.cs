@@ -6,6 +6,6 @@ namespace Blink1BuildStatus.Core.Interfaces.Infrastructure.TfsAccess
     {
         string TfsInstance { get; }
 
-        IEnumerable<BuildStatus> GetLatestBuildStatuses(string projectName, IEnumerable<string> definitionIDs = null);
+        IEnumerable<BuildStatus> GetLatestBuildStatuses(string projectName, IEnumerable<string> buildDefinitionIDs = null);
     }
 }

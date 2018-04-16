@@ -8,9 +8,9 @@ namespace Blink1BuildStatus.Core.Services
     public class TeamCityBuildService : IBuildService
     {
         private readonly ITeamCityAccess _teamCityAccess;
-        private readonly List<string> _buildConfigurationIDs;
+        private readonly IEnumerable<string> _buildConfigurationIDs;
 
-        public TeamCityBuildService(ITeamCityAccess teamCityAccess, List<string> buildConfigurationIDs)
+        public TeamCityBuildService(ITeamCityAccess teamCityAccess, IEnumerable<string> buildConfigurationIDs)
         {
             _teamCityAccess = teamCityAccess;
             _buildConfigurationIDs = buildConfigurationIDs;

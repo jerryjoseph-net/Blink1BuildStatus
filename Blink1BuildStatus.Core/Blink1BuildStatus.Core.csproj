@@ -41,6 +41,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildServer.cs" />
     <Compile Include="BuildStatus.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\Infrastructure.Blink1Control\IBlink1.cs" />
