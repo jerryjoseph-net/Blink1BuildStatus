@@ -46,9 +46,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ConsolidatedStatusTest.cs" />
     <Compile Include="Infrastructure.TfsAccess\TfsBuildItemExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\ObjectExtensionsTest.cs" />
+    <Compile Include="Core\Extensions\ObjectExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

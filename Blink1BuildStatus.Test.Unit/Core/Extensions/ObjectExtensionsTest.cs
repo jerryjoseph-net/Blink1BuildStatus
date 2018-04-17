@@ -2,7 +2,7 @@
 using Blink1BuildStatus.Core.Extensions;
 using NUnit.Framework;
 
-namespace Blink1BuildStatus.Test.Unit.Core
+namespace Blink1BuildStatus.Test.Unit.Core.Extensions
 {
     [TestFixture]
     public class ObjectExtensionsTest

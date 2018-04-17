@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Blink1BuildStatus.Core.Interfaces;
 using Blink1BuildStatus.Core.Interfaces.Core;
@@ -39,7 +37,9 @@ namespace Blink1BuildStatus.Core
                     {
                         var latestBuildStatuses = _buildService.GetLatestBuildStatuses();
 
-                        SetColour(blink1, latestBuildStatuses);
+                        var consolidatedStatus = new ConsolidatedStatus(latestBuildStatuses);
+
+                        SetColour(blink1, consolidatedStatus);
                     }
                     catch (Exception)
                     {
@@ -51,31 +51,29 @@ namespace Blink1BuildStatus.Core
             }
         }
 
-        private void SetColour(IBlink1 blink1, List<BuildStatus> latestBuildStatuses)
+        private void SetColour(IBlink1 blink1, ConsolidatedStatus consolidatedStatus)
         {
-            if (latestBuildStatuses.Any(lb => lb == BuildStatus.Failure))
+            switch (consolidatedStatus.BuildStatus)
             {
-                _log.Error("Setting RED due to one or more build failures");
+                case BuildStatus.Failure:
+                    _log.Error($"Setting {consolidatedStatus.Color} since {consolidatedStatus.Reason}");
+                    blink1.SetRed();
+                    break;
 
-                blink1.SetRed();
-            }
-            else if (latestBuildStatuses.All(lb => lb == BuildStatus.Success))
-            {
-                _log.Success("Setting GREEN since all builds succeeded");
+                case BuildStatus.Success:
+                    _log.Success($"Setting {consolidatedStatus.Color} since {consolidatedStatus.Reason}");
+                    blink1.SetGreen();
+                    break;
 
-                blink1.SetGreen();
-            }
-            else if (latestBuildStatuses.Any(lb => lb == BuildStatus.Running))
-            {
-                _log.Warning("Setting ORANGE since one or more builds are running");
+                case BuildStatus.Running:
+                    _log.Warning($"Setting {consolidatedStatus.Color} since {consolidatedStatus.Reason}");
+                    blink1.SetOrange();
+                    break;
 
-                blink1.SetOrange();
-            }
-            else
-            {
-                _log.Info("Setting GREY due to unknown state");
-
-                blink1.SetGrey();
+                default:
+                    _log.Info($"Setting {consolidatedStatus.Color} since  {consolidatedStatus.Reason}");
+                    blink1.SetGrey();
+                    break;
             }
         }
     }
