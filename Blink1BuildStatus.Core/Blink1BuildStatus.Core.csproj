@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BuildServer.cs" />
     <Compile Include="BuildStatus.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\Infrastructure.Blink1Control\IBlink1.cs" />
     <Compile Include="Interfaces\Infrastructure.Blink1Control\IBlink1Factory.cs" />

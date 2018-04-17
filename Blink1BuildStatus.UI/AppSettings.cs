@@ -1,5 +1,5 @@
 ﻿using Blink1BuildStatus.Core;
-using System;
+using Blink1BuildStatus.Core.Extensions;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -11,17 +11,17 @@ namespace Blink1BuildStatus.UI
     {
         public static class Blink1
         {
-            public static bool FadeInsteadOfBlink => bool.Parse(ConfigurationManager.AppSettings[$"{nameof(Blink1)}.{nameof(FadeInsteadOfBlink)}"]);
+            public static bool FadeInsteadOfBlink => ConfigurationManager.AppSettings[$"{nameof(Blink1)}.{nameof(FadeInsteadOfBlink)}"].ConvertTo<bool>();
         }
 
         public static class Monitoring
         {
-            public static BuildServer BuildServer => (BuildServer)Enum.Parse(typeof(BuildServer), ConfigurationManager.AppSettings[$"{nameof(Monitoring)}.{nameof(BuildServer)}"]);
+            public static BuildServer BuildServer => ConfigurationManager.AppSettings[$"{nameof(Monitoring)}.{nameof(BuildServer)}"].ConvertTo<BuildServer>();
         }
 
         public static class TFS
         {
-            public static bool UseFake => bool.Parse(ConfigurationManager.AppSettings[$"{nameof(TFS)}.{nameof(UseFake)}"]);
+            public static bool UseFake => ConfigurationManager.AppSettings[$"{nameof(TFS)}.{nameof(UseFake)}"].ConvertTo<bool>();
 
             public static string Instance => ConfigurationManager.AppSettings[$"{nameof(TFS)}.{nameof(Instance)}"];
 
@@ -35,11 +35,11 @@ namespace Blink1BuildStatus.UI
 
         public static class TeamCity
         {
-            public static bool UseFake => bool.Parse(ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(UseFake)}"]);
+            public static bool UseFake => ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(UseFake)}"].ConvertTo<bool>();
 
             public static string Instance => ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(Instance)}"];
 
-            public static bool UseGuestLogin => bool.Parse(ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(UseGuestLogin)}"]);
+            public static bool UseGuestLogin => ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(UseGuestLogin)}"].ConvertTo<bool>();
 
             public static string Username => ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(Username)}"];
             public static string Password => ConfigurationManager.AppSettings[$"{nameof(TeamCity)}.{nameof(Password)}"];
