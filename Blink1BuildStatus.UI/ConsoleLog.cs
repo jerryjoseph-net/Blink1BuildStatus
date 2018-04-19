@@ -3,7 +3,7 @@ using Blink1BuildStatus.Core.Interfaces;
 
 namespace Blink1BuildStatus.UI
 {
-    public class ConsoleLogger : ILog
+    public class ConsoleLog : ILog
     {
         public void Info(string message)
         {

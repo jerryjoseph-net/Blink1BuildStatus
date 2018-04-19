@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="ConsoleLogger.cs" />
+    <Compile Include="ConsoleLog.cs" />
     <Compile Include="DependencyInjection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

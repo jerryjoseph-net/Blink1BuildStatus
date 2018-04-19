@@ -44,7 +44,7 @@ namespace Blink1BuildStatus.UI
 
             Blink1Factory = new Blink1Factory(fadeInsteadOfBlink);
 
-            BuildStatusMonitor = new BuildStatusMonitor(Blink1Factory, BuildService, new ConsoleLogger());
+            BuildStatusMonitor = new BuildStatusMonitor(Blink1Factory, BuildService, new ConsoleLog());
         }
     }
 }
