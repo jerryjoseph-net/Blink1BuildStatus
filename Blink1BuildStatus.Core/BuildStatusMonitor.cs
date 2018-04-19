@@ -29,25 +29,36 @@ namespace Blink1BuildStatus.Core
                 _log.Info(info);
             }
 
-            using (var blink1 = _blink1Factory.Create())
+            try
             {
-                while (true)
+                using (var blink1 = _blink1Factory.Create())
                 {
-                    try
+                    while (true)
                     {
-                        var latestBuildStatuses = _buildService.GetLatestBuildStatuses();
+                        try
+                        {
+                            var latestBuildStatuses = _buildService.GetLatestBuildStatuses();
 
-                        var consolidatedStatus = new ConsolidatedStatus(latestBuildStatuses);
+                            var consolidatedStatus = new ConsolidatedStatus(latestBuildStatuses);
 
-                        SetColour(blink1, consolidatedStatus);
+                            SetColour(blink1, consolidatedStatus);
+                        }
+                        catch (Exception)
+                        {
+                            _log.Error("Unable to connect to build server");
+                        }
+
+                        Thread.Sleep(2000);
                     }
-                    catch (Exception)
-                    {
-                        _log.Error("Unable to connect");
-                    }
-
-                    Thread.Sleep(2000);
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                _log.Error(ex.Message);
+                _log.Info("Connect blink(1) and restart the program");
+
+                while (true)
+                { }
             }
         }
 

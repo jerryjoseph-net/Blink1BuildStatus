@@ -37,7 +37,12 @@ namespace Blink1BuildStatus.UI
 
         private static bool Handler(CtrlType sig)
         {
-            using (var blink1 = DependencyInjection.Blink1Factory.Create())
+            try
+            {
+                using (var blink1 = DependencyInjection.Blink1Factory.Create())
+                { }
+            }
+            catch
             { }
 
             switch (sig)
