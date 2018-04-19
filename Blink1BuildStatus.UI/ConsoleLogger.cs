@@ -13,9 +13,9 @@ namespace Blink1BuildStatus.UI
         public void Heading(string message)
         {
             Console.WriteLine();
-            Console.WriteLine("******************************************************************************");
+            Console.WriteLine("".PadRight(80, '*'));
             CreateStandardLog(message);
-            Console.WriteLine("******************************************************************************");
+            Console.WriteLine("".PadRight(80, '*'));
             Console.WriteLine();
         }
 
