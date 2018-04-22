@@ -18,11 +18,14 @@ namespace Blink1BuildStatus.UI
         public static ITeamCityAccess TeamCityAccess;
         public static IBuildService BuildService;
         public static IBlink1Factory Blink1Factory;
+        public static IBlink1NotificationService Blink1NotificationService;
         public static IBuildStatusMonitor BuildStatusMonitor;
 
         public static void Setup()
         {
             var fadeInsteadOfBlink = AppSettings.Blink1.FadeInsteadOfBlink;
+
+            var log = new ConsoleLog(); 
 
             TfsAccess = AppSettings.TFS.UseFake
                 ? (ITfsAccess)new FakeTfsAccess()
@@ -44,7 +47,9 @@ namespace Blink1BuildStatus.UI
 
             Blink1Factory = new Blink1Factory(fadeInsteadOfBlink);
 
-            BuildStatusMonitor = new BuildStatusMonitor(Blink1Factory, BuildService, new ConsoleLog());
+            Blink1NotificationService = new Blink1NotificationService(log);
+
+            BuildStatusMonitor = new BuildStatusMonitor(Blink1Factory, BuildService, Blink1NotificationService, log);
         }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="BuildStatus.cs" />
     <Compile Include="ConsolidatedStatus.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Interfaces\Core\Services\IBlink1NotificationService.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\Infrastructure.Blink1Control\IBlink1.cs" />
     <Compile Include="Interfaces\Infrastructure.Blink1Control\IBlink1Factory.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Interfaces\Infrastructure.TfsAccess\ITfsAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Core\Services\IBuildService.cs" />
+    <Compile Include="Services\Blink1NotificationService.cs" />
     <Compile Include="Services\TeamCityBuildService.cs" />
     <Compile Include="BuildStatusMonitor.cs" />
     <Compile Include="Services\TfsBuildService.cs" />

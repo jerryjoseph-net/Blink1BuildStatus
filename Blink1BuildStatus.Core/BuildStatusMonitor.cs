@@ -11,12 +11,18 @@ namespace Blink1BuildStatus.Core
     {
         private readonly IBlink1Factory _blink1Factory;
         private readonly IBuildService _buildService;
+        private readonly IBlink1NotificationService _blink1NotificationService;
         private readonly ILog _log;
 
-        public BuildStatusMonitor(IBlink1Factory blink1Factory, IBuildService buildService, ILog log)
+        public BuildStatusMonitor(
+            IBlink1Factory blink1Factory, 
+            IBuildService buildService, 
+            IBlink1NotificationService blink1NotificationService, 
+            ILog log)
         {
             _blink1Factory = blink1Factory;
             _buildService = buildService;
+            _blink1NotificationService = blink1NotificationService;
             _log = log;
         }
 
@@ -41,7 +47,7 @@ namespace Blink1BuildStatus.Core
 
                             var consolidatedStatus = new ConsolidatedStatus(latestBuildStatuses);
 
-                            SetColour(blink1, consolidatedStatus);
+                            _blink1NotificationService.Notify(blink1, consolidatedStatus);
                         }
                         catch (Exception)
                         {
@@ -59,32 +65,6 @@ namespace Blink1BuildStatus.Core
 
                 while (true)
                 { }
-            }
-        }
-
-        private void SetColour(IBlink1 blink1, ConsolidatedStatus consolidatedStatus)
-        {
-            switch (consolidatedStatus.BuildStatus)
-            {
-                case BuildStatus.Failure:
-                    _log.Error($"Setting {consolidatedStatus.Color} since {consolidatedStatus.Reason}");
-                    blink1.SetRed();
-                    break;
-
-                case BuildStatus.Success:
-                    _log.Success($"Setting {consolidatedStatus.Color} since {consolidatedStatus.Reason}");
-                    blink1.SetGreen();
-                    break;
-
-                case BuildStatus.Running:
-                    _log.Warning($"Setting {consolidatedStatus.Color} since {consolidatedStatus.Reason}");
-                    blink1.SetOrange();
-                    break;
-
-                default:
-                    _log.Info($"Setting {consolidatedStatus.Color} since  {consolidatedStatus.Reason}");
-                    blink1.SetGrey();
-                    break;
             }
         }
     }
