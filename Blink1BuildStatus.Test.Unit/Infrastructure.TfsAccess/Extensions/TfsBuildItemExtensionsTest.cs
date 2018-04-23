@@ -1,8 +1,9 @@
 ﻿using Blink1BuildStatus.Core;
 using Blink1BuildStatus.Infrastructure.TfsAccess;
+using Blink1BuildStatus.Infrastructure.TfsAccess.Extensions;
 using NUnit.Framework;
 
-namespace Blink1BuildStatus.Test.Unit.Infrastructure.TfsAccess
+namespace Blink1BuildStatus.Test.Unit.Infrastructure.TfsAccess.Extensions
 {
     [TestFixture]
     public class TfsBuildItemExtensionsTest
