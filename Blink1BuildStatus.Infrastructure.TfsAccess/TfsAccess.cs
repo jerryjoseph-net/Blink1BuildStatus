@@ -26,16 +26,14 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
 
             var relevantBuilds = tfsBuildsResponse?.Value
                 .Where(b => b.Status == TfsBuildStatus.InProgress || b.Status == TfsBuildStatus.Completed)
-                .Where(b => b.Result != TfsBuildResult.Canceled);
+                .Where(b => b.Result != TfsBuildResult.Canceled)
+                .ToList()
+                ?? new List<TfsBuildItem>();
 
-            var definitionIds = relevantBuilds.Select(rb => rb.Definition.Id).Distinct();
+            // Select latest build for each definition ID in the result
 
-            var latestBuilds = new List<TfsBuildItem>();
-
-            foreach (var definitionId in definitionIds)
-            {
-                latestBuilds.Add(relevantBuilds.Where(rb => rb.Definition.Id == definitionId).First());
-            }
+            var definitionIdsInResult = relevantBuilds.Select(rb => rb.Definition.Id).Distinct();
+            var latestBuilds = definitionIdsInResult.Select(di => relevantBuilds.First(rb => rb.Definition.Id == di)).ToList();
 
             foreach (var latestBuild in latestBuilds)
             {
