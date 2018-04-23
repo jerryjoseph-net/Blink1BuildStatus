@@ -53,13 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\TfsBuildsResponseExtensions.cs" />
     <Compile Include="FakeTfsAccess.cs" />
     <Compile Include="TfsAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TfsApiClient.cs" />
     <Compile Include="TfsBuildDefinition.cs" />
     <Compile Include="TfsBuildItem.cs" />
-    <Compile Include="TfsBuildItemExtensions.cs" />
+    <Compile Include="Extensions\TfsBuildItemExtensions.cs" />
     <Compile Include="TfsBuildResult.cs" />
     <Compile Include="TfsBuildsResponse.cs" />
     <Compile Include="TfsBuildStatus.cs" />

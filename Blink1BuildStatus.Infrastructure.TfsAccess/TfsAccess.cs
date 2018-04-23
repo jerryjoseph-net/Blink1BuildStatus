@@ -2,6 +2,7 @@
 using System.Linq;
 using Blink1BuildStatus.Core;
 using Blink1BuildStatus.Core.Interfaces.Infrastructure.TfsAccess;
+using Blink1BuildStatus.Infrastructure.TfsAccess.Extensions;
 
 namespace Blink1BuildStatus.Infrastructure.TfsAccess
 {
@@ -24,11 +25,7 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
 
             var buildStatuses = new List<BuildStatus>();
 
-            var relevantBuilds = tfsBuildsResponse?.Value
-                .Where(b => b.Status == TfsBuildStatus.InProgress || b.Status == TfsBuildStatus.Completed)
-                .Where(b => b.Result != TfsBuildResult.Canceled)
-                .ToList()
-                ?? new List<TfsBuildItem>();
+            var relevantBuilds = tfsBuildsResponse.ExtractRelevantBuilds();
 
             // Select latest build for each definition ID in the result
 

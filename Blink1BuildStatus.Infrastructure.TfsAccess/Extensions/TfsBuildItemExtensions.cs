@@ -1,7 +1,7 @@
-﻿using Blink1BuildStatus.Core;
-using System;
+﻿using System;
+using Blink1BuildStatus.Core;
 
-namespace Blink1BuildStatus.Infrastructure.TfsAccess
+namespace Blink1BuildStatus.Infrastructure.TfsAccess.Extensions
 {
     public static class TfsBuildItemExtensions
     {
