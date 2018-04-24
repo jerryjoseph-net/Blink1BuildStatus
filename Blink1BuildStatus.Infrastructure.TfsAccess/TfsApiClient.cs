@@ -12,11 +12,11 @@ namespace Blink1BuildStatus.Infrastructure.TfsAccess
     {
         private readonly HttpClient _httpClient;
 
-        public TfsApiClient(string tfsHost, string username, string password)
+        public TfsApiClient(string tfsInstance, string username, string password)
         {
-            _httpClient = new HttpClient {BaseAddress = new Uri(tfsHost)};
+            _httpClient = new HttpClient {BaseAddress = new Uri(tfsInstance)};
 
-            Instance = tfsHost;
+            Instance = tfsInstance;
 
             var mediaTypeHeader = new MediaTypeWithQualityHeaderValue("application/json");
             _httpClient.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
