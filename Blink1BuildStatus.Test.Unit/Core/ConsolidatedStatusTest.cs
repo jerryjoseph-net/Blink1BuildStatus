@@ -43,5 +43,15 @@ namespace Blink1BuildStatus.Test.Unit.Core
 
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void Constructor_AtLeastOneUnknown_ConsolidatesToUnknown()
+        {
+            var sut = new ConsolidatedStatus(new List<BuildStatus> { BuildStatus.Unknown, BuildStatus.Success });
+
+            var result = sut.BuildStatus;
+
+            Assert.AreEqual(BuildStatus.Unknown, result);
+        }
     }
 }
